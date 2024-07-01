@@ -1,0 +1,197 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+var follow_index;
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    var version, print, arange, __name__, type, ρσ_ls, fullscreen_js, G, m1, m2, m3, r1, r2, r3, v1, v2, v3, sun1, sun2, planet, dt, follow_index, objects_to_follow, F12, F13, F23;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "24";
+    fullscreen_js = "\n<style>\nhtml, body { margin: 0; padding: 0; overflow: hidden; height: 100%; }\n#glowscript-canvas { width: 100vw; height: 100vh; display: block; }\n<\/style>\n<script>\nwindow.addEventListener(\"load\", function() {\n    var canvas = document.getElementById('glowscript-canvas');\n    if (canvas.requestFullscreen) {\n        canvas.requestFullscreen();\n    } else if (canvas.mozRequestFullScreen) { // Firefox\n        canvas.mozRequestFullScreen();\n    } else if (canvas.webkitRequestFullscreen) { // Chrome, Safari and Opera\n        canvas.webkitRequestFullscreen();\n    } else if (canvas.msRequestFullscreen) { // IE/Edge\n        canvas.msRequestFullscreen();\n    }\n});\n</script>\n";
+    "26";
+    scene.append_to_caption(fullscreen_js);
+    "27";
+    scene.width = 1920;
+    "28";
+    scene.height = 1080;
+    "29";
+    scene.background = color.black;
+    "32";
+    G = 6.6743e-11;
+    "33";
+    m1 = 1.989e30;
+    "34";
+    m2 = 1.989e30;
+    "35";
+    m3 = 5.972e24;
+    "38";
+    r1 = vector(1["-u"]()["*"](1e11), 0, 0);
+    "39";
+    r2 = vector(1e11, 0, 0);
+    "40";
+    r3 = vector(0, 0, 0);
+    "43";
+    v1 = vector(0, 1["-u"]()["*"](2e4), 0);
+    "44";
+    v2 = vector(0, 2e4, 0);
+    "45";
+    v3 = vector(25e3, 0, 0);
+    "48";
+    sun1 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: r1, radius: 7e9, texture: "sun_texture.jpg", emissive: true})]);
+    "49";
+    sun2 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: r2, radius: 7e9, texture: "sun_texture.jpg", emissive: true})]);
+    "50";
+    planet = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: r3, radius: 3e9, texture: "earth_texture.jpg", make_trail: true, trail_color: color.white})]);
+    "53";
+    ρσ_interpolate_kwargs.call(this, distant_light, [ρσ_desugar_kwargs({direction: vector(1, 0, 0), color: color.white})]);
+    "54";
+    ρσ_interpolate_kwargs.call(this, local_light, [ρσ_desugar_kwargs({pos: sun1.pos, color: color.yellow})]);
+    "55";
+    ρσ_interpolate_kwargs.call(this, local_light, [ρσ_desugar_kwargs({pos: sun2.pos, color: color.orange})]);
+    "58";
+    dt = 1e3;
+    "60";
+    async function gravitational_force(m1, m2, r1, r2) {
+        var ρσ_ls, r, r_mag, r_hat, force;
+        "61";
+        r = r2["-"](1["*"](r1));
+        "62";
+        r_mag = mag(r);
+        "63";
+        r_hat = r["/"](r_mag);
+        "64";
+        force = G["*"](m1)["*"](m2)["/"](Math.pow(r_mag, 2))["*"](r_hat);
+        "65";
+        return force;
+    };
+    if (!gravitational_force.__argnames__) Object.defineProperties(gravitational_force, {
+        __argnames__ : {value: ["m1", "m2", "r1", "r2"]},
+        __module__ : {value: null}
+    });
+
+    "68";
+    scene.camera.pos = vector(0, 1["-u"]()["*"](2e11), 2e11);
+    "69";
+    scene.camera.axis = vector(0, 1["-u"]()["*"](1e11), 1["-u"]()["*"](2e11));
+    "72";
+    follow_index = 0;
+    "73";
+    objects_to_follow = ρσ_list_decorate([ planet, sun1, sun2 ]);
+    "75";
+    async function on_keydown(evt) {
+        "76";
+        "77";
+        if ((evt.key === "f" || typeof evt.key === "object" && ρσ_equals(evt.key, "f"))) {
+            "78";
+            follow_index = follow_index["+"](1)["%"](len(objects_to_follow));
+            "79";
+            scene.camera.follow(ρσ_getitem(objects_to_follow, follow_index));
+        }
+    };
+    if (!on_keydown.__argnames__) Object.defineProperties(on_keydown, {
+        __argnames__ : {value: ["evt"]},
+        __module__ : {value: null}
+    });
+
+    "81";
+    scene.bind("keydown", on_keydown);
+    "84";
+    while (true) {
+        "85";
+        (await rate(100));
+        "88";
+        F12 = (await gravitational_force(m1, m2, r1, r2));
+        "89";
+        F13 = (await gravitational_force(m1, m3, r1, r3));
+        "90";
+        F23 = (await gravitational_force(m2, m3, r2, r3));
+        "93";
+        v1=v1["+"](F12["+"](F13)["/"](m1)["*"](dt));
+        "94";
+        v2=v2["+"](1["-u"]()["*"](F12)["+"](F23)["/"](m2)["*"](dt));
+        "95";
+        v3=v3["+"](1["-u"]()["*"](F13)["-"](1["*"](F23))["/"](m3)["*"](dt));
+        "98";
+        r1=r1["+"](v1["*"](dt));
+        "99";
+        r2=r2["+"](v2["*"](dt));
+        "100";
+        r3=r3["+"](v3["*"](dt));
+        "103";
+        sun1.pos = r1;
+        "104";
+        sun2.pos = r2;
+        "105";
+        planet.pos = r3;
+        "108";
+        scene.center = ρσ_getitem(objects_to_follow, follow_index).pos;
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
