@@ -22,4 +22,4 @@ This project is deployed using GitHub Pages. You can visit the live site [here](
 
 ## Resources
 
-- [GlowScript Documentation](https://www.glowscript.org/docs/)
+- [GlowScript Documentation](https://www.glowscript.org)
